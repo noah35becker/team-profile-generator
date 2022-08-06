@@ -39,7 +39,7 @@ test('gets email of engineer', () => {
 test('gets GitHub username of engineer', () => {
     const engineer = new Engineer(1, 'Noah', 'noahbeckercoding@gmail.com', 'noah35becker');
 
-    expect(engineer.getGithub).toBe('noah35becker');
+    expect(engineer.getGithub()).toBe('noah35becker');
 });
 
 
