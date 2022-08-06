@@ -14,17 +14,17 @@ test('creates a Manager object', () => {
 });
 
 
-test('gets name of manager', () => {
-    const manager = new Manager(1, 'Noah', 'noahbeckercoding@gmail.com', 40);
-
-    expect(manager.getName()).toBe('Noah');
-});
-
-
 test('gets ID of manager', () => {
     const manager = new Manager(1, 'Noah', 'noahbeckercoding@gmail.com', 40);
 
     expect(manager.getID()).toBe(1);
+});
+
+
+test('gets name of manager', () => {
+    const manager = new Manager(1, 'Noah', 'noahbeckercoding@gmail.com', 40);
+
+    expect(manager.getName()).toBe('Noah');
 });
 
 
@@ -35,15 +35,15 @@ test('gets email of manager', () => {
 });
 
 
-test('gets role of manager', () => {
-    const manager = new Manager(1, 'Noah', 'noahbeckercoding@gmail.com', 40);
-
-    expect(manager.getRole()).toBe('Manager');
-});
-
-
 test('gets office # of manager', () => {
     const manager = new Manager(1, 'Noah', 'noahbeckercoding@gmail.com', 40);
 
     expect(manager.getOfficeNumber()).toBe(40);
+});
+
+
+test('gets role of manager', () => {
+    const manager = new Manager(1, 'Noah', 'noahbeckercoding@gmail.com', 40);
+
+    expect(manager.getRole()).toBe('Manager');
 });
