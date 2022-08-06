@@ -9,7 +9,7 @@ test('creates an Intern object', () => {
     expect(intern.id).toBe(1);
     expect(intern.name).toBe('Noah');
     expect(intern.email).toBe('noahbeckercoding@gmail.com');
-    expect(intern.github).toBe('The New School');
+    expect(intern.school).toBe('The New School');
     expect(intern.role).toBe('Intern');
 });
 
