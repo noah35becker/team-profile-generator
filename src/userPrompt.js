@@ -1,17 +1,22 @@
 
+// IMPORTS
 const inquirer = require('inquirer');
 const [Engineer, Intern, Manager] = [require('../lib/Engineer'), require('../lib/Intern'), require('../lib/Manager')];
 
+
+
+// GLOBAL VARIABLES
 const TAB = '    '; // 4 spaces
 const ANSI = {
-    bold: {
-        set: '\033[1m',
-        reset: '\033[0m'
+    weight: {
+        bold: '\033[1m',
+        normal: '\033[0m'
     },
     color: {
         yellow: '\u001b[33m',
         magenta: '\u001b[35m',
-        reset: '\u001b[0m'
+        cyan: '\u001b[36m',
+        normal: '\u001b[0m'
     }
 };
 
@@ -19,18 +24,20 @@ var employees = [];
 
 
 
+// FUNCTIONS
 
 // Inquirer prompt, prepending results so far
-const inquirerPrompt = (resultsSoFar, questions) => new Promise(resolve => {
+const inquirerPrompt = (questions, resultsSoFar) => new Promise(resolve => 
     inquirer.prompt(questions)
-    .then(theseResults => resolve({...resultsSoFar, ...theseResults}));
-});
+    .then(theseResults => resolve({...resultsSoFar, ...theseResults}))
+);
 
 
+// Make a new Employee object, and add it to the employees[] array
 const makeNewEmployee = (role) => new Promise(resolve => {
-    console.log(`${ANSI.bold.set}${ANSI.color.magenta}${role}:${ANSI.bold.reset}${ANSI.color.reset}`);
+    console.log(`${ANSI.weight.bold}${ANSI.color.magenta}${role}:${ANSI.weight.normal}${ANSI.color.normal}`);
     
-    inquirerPrompt({}, [
+    inquirerPrompt([
         {
             type: 'input',
             name: 'name',
@@ -48,40 +55,43 @@ const makeNewEmployee = (role) => new Promise(resolve => {
         },
     ]).then(resultsSoFar => {
         if (role === 'Manager')
-            return inquirerPrompt(resultsSoFar, {
+            return inquirerPrompt({
                 type: 'input',
                 name: 'officeNumber',
                 message: `${TAB}Enter office number:`
-            });
+            }, resultsSoFar);
         else if (role === 'Engineer')
-            return inquirerPrompt(resultsSoFar, {
+            return inquirerPrompt({
                 type: 'input',
                 name: 'github',
                 message: `${TAB}Enter GitHub account:`
-            });
+            }, resultsSoFar);
         else if (role === 'Intern')
-            return inquirerPrompt(resultsSoFar, {
+            return inquirerPrompt({
                 type: 'input',
                 name: 'school',
                 message: `${TAB}Enter school:`
-            });
+            }, resultsSoFar);
     }).then(({id, name, email, ...other}) => {
         if (role === 'Manager')
-            resolve(employees.push(new Manager(id, name, email, other.officeNumber)));
+            employees.push(new Manager(id, name, email, other.officeNumber));
         else if (role === 'Engineer')
-            resolve(employees.push(new Engineer(id, name, email, other.github)));
+            employees.push(new Engineer(id, name, email, other.github));
         else if (role === 'Intern')
-            resolve(employees.push(new Intern(id, name, email, other.school)));
+            employees.push(new Intern(id, name, email, other.school));
+        
+        resolve(menu());
     });
     ;
 });
 
 
+// Show the menu to the user
 const menu = () => new Promise(resolve => {
-    inquirerPrompt({}, {
+    inquirerPrompt({
         type: 'list',
         name: 'next',
-        message: `${ANSI.color.yellow}What would you like to do next?${ANSI.color.reset}`,
+        message: `${ANSI.color.yellow}What would you like to do next?${ANSI.color.normal}`,
         choices: ['Enter an engineer', 'Enter an intern', "I've finished building my team"]
     })
     .then(({next}) => {
@@ -90,9 +100,20 @@ const menu = () => new Promise(resolve => {
         else if (next === 'Enter an intern')
             resolve(makeNewEmployee('Intern'));
         else
-            ; // ADD CODE FOR "FINISHED BUILDING MY TEAM"
+            resolve();
     });
 });
 
 
-menu();
+// Prompt user: first for manager info, then take them to the menu
+const userPrompt = () => new Promise(resolve => {
+    console.log(`${ANSI.weight.bold}${ANSI.color.cyan}** Welcome! **${ANSI.weight.normal}${ANSI.color.normal}`)
+
+    makeNewEmployee('Manager') // automatically proceeds to call menu() thereafter
+    .then(() => resolve(employees));
+});
+
+
+
+// EXPORT
+module.exports = userPrompt;
