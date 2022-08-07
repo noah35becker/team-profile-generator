@@ -63,6 +63,17 @@ const isValidNumber = input => {
 }
 
 
+// Get last index at a which a given character appears in a string
+const getLastIndex = (string, char) => {
+    let reversedIndex = string.split('').reverse().join('').indexOf(char);
+
+    if (reversedIndex === -1)
+        return NaN;
+
+    return string.length - 1 - reversedIndex;
+}
+
+
 // Make a new Employee object, and add it to the employees[] array
 const makeNewEmployee = (role) => new Promise(resolve => {
     console.log(`${ANSI.weight.bold}${ANSI.color.magenta}${role}:`);
@@ -100,12 +111,15 @@ const makeNewEmployee = (role) => new Promise(resolve => {
                     return false;
                 
                 let
-                    atSignIndex = input.indexOf('@'),
-                    periodIndex = input.indexOf('.');
+                    atSignFirstIndex = input.indexOf('@'),
+                    atSignLastIndex = getLastIndex(input, '@');
+                    periodLastIndex = getLastIndex(input, '.');
+
                 if (
-                    atSignIndex >= 1 // there's an @ sign, as the second character or later
-                    && periodIndex >= atSignIndex + 2 // there's a period, w/ at least one character between it and the @ sign
-                    && input.length - 1 > periodIndex // there's at least one character after the period
+                    atSignFirstIndex >= 1 // there's an @ sign, as the second character or later
+                    && atSignFirstIndex === atSignLastIndex // there's only one @ sign
+                    && periodLastIndex >= atSignFirstIndex + 2 // there's a period, w/ at least one character between it and the @ sign
+                    && input.length - 1 > periodLastIndex // the last character is not a period
                 )
                     return true;
 
