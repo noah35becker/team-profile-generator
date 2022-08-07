@@ -9,7 +9,7 @@
 
 
 ## Video walkthrough
-[LINK_NAME](LINK_NAME)
+[https://www.youtube.com/watch?v=WUM0AA9jrDI](https://www.youtube.com/watch?v=WUM0AA9jrDI)
 
 
 ## Description
@@ -77,6 +77,7 @@ Learn more about this license [here](https://choosealicense.com/licenses/agpl-3.
     - then Interns (sorted by ascending ID)
 - Colorized  terminal output
 - Following completion of user input, automatic redirection to the newly created webpage
+- Responsive front-end design
 
 
 ## Contributing
