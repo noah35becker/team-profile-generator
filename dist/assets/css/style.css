@@ -1,5 +1,4 @@
 
-
 body{
     font-family: 'Raleway', sans-serif;
     min-height: 100vh;
@@ -15,19 +14,18 @@ header h1{
 }
 
 
-h5, li span{
-    font-weight: 600;
-}
-
-li{
-    font-weight: 400
-}
-
-
 main{
     height: min-content;
     background-color: aliceblue; /* fallback */
     background-image: linear-gradient(white, rgb(103, 216, 241));
+}
+
+
+h5, li span{
+    font-weight: 600;
+}
+li{
+    font-weight: 400;
 }
 
 

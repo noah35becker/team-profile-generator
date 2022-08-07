@@ -1,6 +1,5 @@
 
 // IMPORTS
-
 const inquirer = require('inquirer');
 const [Engineer, Intern, Manager] = [require('../lib/Engineer'), require('../lib/Intern'), require('../lib/Manager')];
 
@@ -9,7 +8,7 @@ const [Engineer, Intern, Manager] = [require('../lib/Engineer'), require('../lib
 // GLOBAL VARIABLES
 
 const TAB = '    '; // 4 spaces
-const ANSI = { // Used to colorize console.log()s in terminal
+const ANSI = { // Used to colorize console.log()s
     weight: {
         bold: '\033[1m',
         normal: '\033[0m'
@@ -175,6 +174,7 @@ const menu = () => new Promise(resolve => {
 
 
 // Prompt user: first for manager info, then for further employees as needed
+// When they're done, return the populated employees array
 const userPrompt = () => new Promise(resolve => {
     console.clear();
     console.log(
@@ -189,7 +189,7 @@ When you're done, a webpage containing all their information will be generated.
 });
 
 
-// Wait for use 
+// Wait for user to press Enter
 const successWaitForEnter = () => new Promise(resolve => {
     console.log(
         `${ANSI.weight.bold}${ANSI.color.green}Webpage successfully generated! Press${ANSI.color.normal}${ANSI.weight.bold} Enter${ANSI.weight.bold}${ANSI.color.green} to open when ready.`)
@@ -208,5 +208,4 @@ const successWaitForEnter = () => new Promise(resolve => {
 
 
 // EXPORT
-
 module.exports = {userPrompt, successWaitForEnter, logError};
