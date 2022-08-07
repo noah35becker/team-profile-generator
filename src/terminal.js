@@ -143,11 +143,11 @@ const makeNewEmployee = (role) => new Promise(resolve => {
             }, resultsSoFar);
     }).then(({id, name, email, ...other}) => {
         if (role === 'Manager')
-            employees.push(new Manager(id, name, email, other.officeNumber));
+            employees.push(new Manager(id.trim(), name.trim(), email.trim(), other.officeNumber.trim()));
         else if (role === 'Engineer')
-            employees.push(new Engineer(id, name, email, other.github));
+            employees.push(new Engineer(id.trim(), name.trim(), email.trim(), other.github.trim()));
         else if (role === 'Intern')
-            employees.push(new Intern(id, name, email, other.school));
+            employees.push(new Intern(id.trim(), name.trim(), email.trim(), other.school.trim()));
         
         resolve(menu());
     });
