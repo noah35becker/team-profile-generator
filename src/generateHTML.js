@@ -60,8 +60,6 @@ const getEmployeesHTML = (employees) => {
 
 
 const generateHTML = (employees) => {
-    console.log(employees);
-    
     employees = sortEmployees(employees);
 
     return `<!DOCTYPE html>

@@ -19,6 +19,7 @@ const ANSI = { // Used to colorize console.log()s in terminal
         magenta: '\u001b[35m',
         cyan: '\u001b[36m',
         red: '\u001b[31m',
+        green: '\u001b[32m',
         normal: '\u001b[0m'
     }
 };
@@ -38,7 +39,7 @@ const inquirerPrompt = (questions, resultsSoFar) => new Promise(resolve =>
 
 // Log error message in console (w/ appropriate formatting)
 const logError = errMsg => 
-    console.log(`  ${ANSI.color.red}${errMsg}${ANSI.color.normal}`);
+    console.log(`  ${ANSI.color.red}${errMsg}`);
 
 
 // Check if input is blank, log error message if so
@@ -63,10 +64,9 @@ const isValidNumber = input => {
 }
 
 
-
 // Make a new Employee object, and add it to the employees[] array
 const makeNewEmployee = (role) => new Promise(resolve => {
-    console.log(`${ANSI.weight.bold}${ANSI.color.magenta}${role}:${ANSI.weight.normal}${ANSI.color.normal}`);
+    console.log(`${ANSI.weight.bold}${ANSI.color.magenta}${role}:`);
     
     inquirerPrompt([
         {
@@ -100,10 +100,9 @@ const makeNewEmployee = (role) => new Promise(resolve => {
                 if (isBlank(input))
                     return false;
                 
-                let atSignIndex = input.indexOf('@');
-                let periodIndex = input.indexOf('.');
-                console.log(' // at sign index: ', atSignIndex, ' // period index: ', periodIndex, ' // string length: ', input.length);
-
+                let
+                    atSignIndex = input.indexOf('@'),
+                    periodIndex = input.indexOf('.');
                 if (
                     atSignIndex >= 1 // there's an @ sign, as the second character or later
                     && periodIndex >= atSignIndex + 2 // there's a period, w/ at least one character between it and the @ sign
@@ -161,7 +160,7 @@ const menu = () => new Promise(resolve => {
     inquirerPrompt({
         type: 'list',
         name: 'next',
-        message: `${ANSI.color.yellow}What would you like to do next?${ANSI.color.normal}`,
+        message: `${ANSI.color.yellow}What would you like to do next?`,
         choices: ['Enter an engineer', 'Enter an intern', "I've finished building my team"]
     })
     .then(({next}) => {
@@ -175,16 +174,33 @@ const menu = () => new Promise(resolve => {
 });
 
 
-// Prompt user: first for manager info, then take them to the menu
+// Prompt user: first for manager info, then for further employees as needed
 const userPrompt = () => new Promise(resolve => {
-    console.log(`${ANSI.weight.bold}${ANSI.color.cyan}** Welcome! **${ANSI.weight.normal}${ANSI.color.normal}`)
+    console.log(`${ANSI.weight.bold}${ANSI.color.cyan}** Welcome! **`)
 
     makeNewEmployee('Manager') // automatically proceeds to further calls of menu() and makeNewEmployee() as needed
     .then(() => resolve(employees));
 });
 
 
+// Wait for use 
+const successWaitForEnter = () => new Promise(resolve => {
+    console.log(
+        `${ANSI.weight.bold}${ANSI.color.green}Webpage successfully generated! Press${ANSI.color.normal}${ANSI.weight.bold} Enter${ANSI.weight.bold}${ANSI.color.green} to open when ready.`)
+    ;
+
+    inquirer.prompt(
+        {
+            type: 'input',
+            name: 'justPressEnter',
+            message: ' ',
+            prefix: ''
+        }
+    ).then(() => resolve());
+});
+
+
 
 // EXPORT
 
-module.exports = userPrompt;
+module.exports = {userPrompt, successWaitForEnter, logError};

@@ -3,8 +3,8 @@ const fs = require('fs');
 const generateHTML = require('./generateHTML');
 
 
-const writeToFile = employees => new Promise((resolve, reject) => {
-    fs.writeFile('./dist/my-team.html', generateHTML(employees), err => {
+const writeToFile = (filepath, employees) => new Promise((resolve, reject) => {
+    fs.writeFile(filepath, generateHTML(employees), err => {
         if (err){
             reject(err);
             return;
@@ -12,7 +12,7 @@ const writeToFile = employees => new Promise((resolve, reject) => {
 
         resolve({
             ok: true,
-            message: `Webpage sucessfully generated!`
+            filepath: filepath
         });
     })
 });
