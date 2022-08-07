@@ -162,6 +162,7 @@ const makeNewEmployee = (role) => new Promise(resolve => {
         else if (role === 'Intern')
             employees.push(new Intern(id.trim(), name.trim(), email.trim(), other.school.trim()));
         
+        console.log(`   ${ANSI.weight.bold}${ANSI.color.green}Stored ✓`)
         resolve(menu());
     });
     ;
@@ -206,8 +207,9 @@ When you're done, a webpage containing all their information will be generated.
 // Wait for user to press Enter
 const successWaitForEnter = () => new Promise(resolve => {
     console.log(
-        `${ANSI.weight.bold}${ANSI.color.green}Webpage successfully generated! Press${ANSI.color.normal}${ANSI.weight.bold} Enter${ANSI.weight.bold}${ANSI.color.green} to open when ready.`)
-    ;
+        `
+${ANSI.weight.bold}${ANSI.color.green}** Webpage successfully generated! Press${ANSI.color.normal}${ANSI.weight.bold} Enter${ANSI.weight.bold}${ANSI.color.green} to open when ready. **`
+    );
 
     inquirer.prompt(
         {
