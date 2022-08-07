@@ -25,7 +25,7 @@ const getIcon = role => {
     if (role === 'Manager')
         return '<i class="fa-solid fa-crown"></i>';
     if (role === 'Engineer')
-        return '<i class="fa-solid fa-brain"></i>';
+        return '<i class="fa-solid fa-bezier-curve"></i>';
     if (role === 'Intern')
         return '<i class="fa-solid fa-graduation-cap"></i>';
 }
