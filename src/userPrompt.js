@@ -109,7 +109,7 @@ const menu = () => new Promise(resolve => {
 const userPrompt = () => new Promise(resolve => {
     console.log(`${ANSI.weight.bold}${ANSI.color.cyan}** Welcome! **${ANSI.weight.normal}${ANSI.color.normal}`)
 
-    makeNewEmployee('Manager') // automatically proceeds to call menu() thereafter
+    makeNewEmployee('Manager') // automatically proceeds to further calls of menu() and makeNewEmployee() as needed
     .then(() => resolve(employees));
 });
 
