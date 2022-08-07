@@ -1,14 +1,26 @@
 
+// Title of page
 const title = 'My Team';
 
 
-const sortEmployees = employees => [
-    ...employees.filter(emp => emp.getRole() === 'Manager'),
-    ...employees.filter(emp => emp.getRole() === 'Engineer'),
-    ...employees.filter(emp => emp.getRole() === 'Intern')
-];
+
+// Sort by manager / engineer / intern, then sort by ascending ID within each
+const sortEmployees = employees => {
+    let [managers, engineers, interns] = [
+        employees.filter(emp => emp.getRole() === 'Manager'),
+        employees.filter(emp => emp.getRole() === 'Engineer'),
+        employees.filter(emp => emp.getRole() === 'Intern')
+    ]
+
+    return [
+        ...managers.sort((a, b) => a.getID() - b.getID()),
+        ...engineers.sort((a, b) => a.getID() - b.getID()),
+        ...interns.sort((a, b) => a.getID() - b.getID())
+    ];
+};
 
 
+// Get icon for given role
 const getIcon = role => {
     if (role === 'Manager')
         return '<i class="fa-solid fa-crown"></i>';
@@ -19,6 +31,7 @@ const getIcon = role => {
 }
 
 
+// Get HTML (Bootstrap cards) for all employees
 const getEmployeesHTML = (employees) => {
     let output = '';
 
@@ -59,6 +72,7 @@ const getEmployeesHTML = (employees) => {
 };
 
 
+// Get ALL of webpage's HTML
 const generateHTML = (employees) => {
     employees = sortEmployees(employees);
 
@@ -96,4 +110,6 @@ const generateHTML = (employees) => {
 };
 
 
+
+// EXPORT
 module.exports = generateHTML;
