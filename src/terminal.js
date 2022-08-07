@@ -176,7 +176,13 @@ const menu = () => new Promise(resolve => {
 
 // Prompt user: first for manager info, then for further employees as needed
 const userPrompt = () => new Promise(resolve => {
-    console.log(`${ANSI.weight.bold}${ANSI.color.cyan}** Welcome! **`)
+    console.clear();
+    console.log(
+`${ANSI.weight.bold}${ANSI.color.cyan}** Welcome to Team Profile Generator! **
+Enter members of your work team here.
+When you're done, a webpage containing all their information will be generated.
+`
+    );
 
     makeNewEmployee('Manager') // automatically proceeds to further calls of menu() and makeNewEmployee() as needed
     .then(() => resolve(employees));
