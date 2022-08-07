@@ -1,0 +1,38 @@
+
+
+body{
+    font-family: 'Raleway', sans-serif;
+    min-height: 100vh;
+}
+
+
+header{
+    background-color: aliceblue; /* fallback */
+    background-image: linear-gradient(rgb(210, 176, 255), white);
+}
+header h1{
+    font-weight: 400;
+}
+
+
+h5, li span{
+    font-weight: 600;
+}
+
+li{
+    font-weight: 400
+}
+
+
+main{
+    height: min-content;
+    background-color: aliceblue; /* fallback */
+    background-image: linear-gradient(white, rgb(103, 216, 241));
+}
+
+
+.card.emp-wrapper{
+    min-width: 300px;
+    box-sizing: content-box;
+    flex-grow: 0;
+}

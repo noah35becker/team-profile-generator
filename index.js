@@ -31,7 +31,7 @@ const writeToFile = employees => new Promise((resolve, reject) => {
 // });
 
 
-// TEST EMPLOYEES
+// TESTER EMPLOYEES
 writeToFile([
     new Manager(1, 'Noah', 'noahbeckercoding@gmail.com', 35),
     new Intern(3, 'Jonah', 'jonahudall@gmail.com', 'Frost School of Music'),
