@@ -59,7 +59,7 @@ const getEmployeesHTML = (employees) => {
                         employee.getRole() === 'Manager' ?
                             `<span>Office #:</span> ${employee.getOfficeNumber()}`
                         : employee.getRole() === 'Engineer' ?
-                            `<span>GitHub:</span> <a href="https://github.com/${employee.getGithub()}" target="_blank">${employee.getGithub()}</a>`
+                            `<span>GitHub: <a href="https://github.com/${employee.getGithub()}" target="_blank">${employee.getGithub()}</a></span> `
                         : // Intern
                             `<span>School:</span> ${employee.getSchool()}`
                     }</li>
